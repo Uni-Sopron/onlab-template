@@ -12,9 +12,15 @@ defaults:
     shell: bash
     working-directory: docs
 
+permissions:
+  contents: read
+  pages: write
+  deployments: write
+  id-token: write
+
 jobs:
   build:
-    name: Deploy to GitHub Pages
+    name: Build website
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -55,6 +61,7 @@ jobs:
 
   # Deployment job
   deploy:
+    name: Deploy to GitHub Pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
