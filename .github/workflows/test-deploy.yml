@@ -20,11 +20,11 @@ jobs:
       - name: Detect package manager
         id: detect-package-manager
         run: |
-          if [ -f "${{ github.workspace }}/${{ env.DOCS_DIR }}/yarn.lock" ]; then
+          if [ -f "${{ github.workspace }}/docs/yarn.lock" ]; then
             echo "::set-output name=manager::yarn"
             echo "::set-output name=command::install"
             exit 0
-          elif [ -f "${{ github.workspace }}/${{ env.DOCS_DIR }}/package.json" ]; then
+          elif [ -f "${{ github.workspace }}/docs/package.json" ]; then
             echo "::set-output name=manager::npm"
             echo "::set-output name=command::ci"
             exit 0
