@@ -17,16 +17,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Set project dir environment var
-        run: echo ::set-env name=PROJECT_DIR::"$GITHUB_WORKSPACE/docs"
       - name: Detect package manager
         id: detect-package-manager
         run: |
-          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
+          if [ -f "${{ github.workspace }}/$DOCS_DIR/yarn.lock" ]; then
             echo "::set-output name=manager::yarn"
             echo "::set-output name=command::install"
             exit 0
-          elif [ -f "${{ github.workspace }}/package.json" ]; then
+          elif [ -f "${{ github.workspace }}/$DOCS_DIR/package.json" ]; then
             echo "::set-output name=manager::npm"
             echo "::set-output name=command::ci"
             exit 0
