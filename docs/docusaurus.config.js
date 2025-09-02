@@ -9,7 +9,7 @@ const config = {
   title: 'Önlab beszámoló',
   tagline: 'Dokumentálni jó',
   url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  baseUrl: `${process.env.BASE_URL ?? ''}/`,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',

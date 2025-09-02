@@ -12,11 +12,16 @@ defaults:
     shell: bash
     working-directory: docs
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
-  deployments: write
   id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -50,10 +55,11 @@ jobs:
           cache-dependency-path: docs/${{ steps.detect-package-manager.outputs.manger_lock }}
       - name: Setup Pages
         uses: actions/configure-pages@v2
+        id: configure-pages
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build website
-        run: ${{ steps.detect-package-manager.outputs.manager }} run build
+        run: BASE_URL=${{ steps.configure-pages.outputs.base_path }} ${{ steps.detect-package-manager.outputs.manager }} run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
